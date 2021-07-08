@@ -1,17 +1,29 @@
-import React from 'react'
-import {StyleSheet, View, Text} from 'react-native'
+import React, { FC } from 'react'
+import { useCallback } from 'react';
+import {StyleSheet, View, Text, Alert} from 'react-native'
 import {Colors} from 'react-native-paper'
 import * as D from '../data'
 
-const title = 'TopBar'
-export default function TopBar() {
+export type TopBarProps = {};
+
+const TopBar: FC<TopBarProps> = () => {
+  const add = useCallback(() => {Alert.alert('add')},[]);
+  const deleteAll = useCallback(() => {Alert.alert('delete')},[]);
   return (
-    <View style={[styles.view]}>
-      <Text style={[styles.text]}>{title}</Text>
+    <View style={[styles.topBar]}>
+      <Text style={[styles.textButton]} onPress={add}>add</Text>
+      <Text style={[styles.textButton]} onPress={deleteAll}>deleteAll</Text>
     </View>
   )
 }
+
+export default TopBar;
+
 const styles = StyleSheet.create({
-  view: {padding: 5, backgroundColor: Colors.blue500},
-  text: {fontSize: 20, color: 'white'},
+  topBar: {
+    flexDirection: 'row',
+    padding: 5,
+    justifyContent: 'space-between'
+  },
+  textButton: {fontSize: 20, color: 'white'},
 })

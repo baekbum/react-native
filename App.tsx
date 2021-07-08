@@ -10,6 +10,8 @@ import Content from './src/components/Content';
 import BottomBar from './src/components/BottomBar';
 import Person from './src/components/person/Person';
 import { color } from 'react-native-reanimated';
+import store from './src/stores/Store';
+import {Provider as ReduxProvider} from 'react-redux'
 
 const people: T.IPerson[] = D.makeArray(10).map(() => D.createRandomPerson());
 
@@ -20,19 +22,21 @@ export default function App() {
 
   return (
     <>
-      <SafeAreaView style={styles.flex}>
-        <TopBar />
-        <FlatList 
-          data={people}
-          renderItem={({item}) => <Person person={item} />}
-          keyExtractor={(item, index) => item.id }
-          ItemSeparatorComponent={() => <View style={[styles.itemSeparator]} />}
-        />
-        <BottomBar />
-      </SafeAreaView>
-      <View style={[styles.absoluteView]} >
-        <Icon name='feather' size={30} color='white' onPress={onPressed} />
-      </View>
+      <ReduxProvider store={store}>
+        <SafeAreaView style={styles.flex}>
+          <TopBar />
+          <FlatList 
+            data={people}
+            renderItem={({item}) => <Person person={item} />}
+            keyExtractor={(item, index) => item.id }
+            ItemSeparatorComponent={() => <View style={[styles.itemSeparator]} />}
+          />
+          <BottomBar />
+        </SafeAreaView>
+        <View style={[styles.absoluteView]} >
+          <Icon name='feather' size={30} color='white' onPress={onPressed} />
+        </View>
+      </ReduxProvider>
     </>
   );
 }
