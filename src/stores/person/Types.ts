@@ -7,9 +7,9 @@ export type personType = {
 };
 
 export type person = {
-  (IData?: IPerson): {
+  (IData?: IPerson[]): {
     type: string;
-    data?: IPerson;
+    data?: IPerson[];
   };
 };
 

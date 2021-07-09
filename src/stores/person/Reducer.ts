@@ -8,7 +8,11 @@ const initializeState: T.state = [];
 const personReducer = (state: T.state = initializeState, action: T.action) => {
   switch (action.type) {
     case A.person.add:
-      return [...state, action.data];
+      if (action.data) {
+        return [...state, ...action.data];
+      } else {
+        return state;
+      }
     case A.person.delete:
       return initializeState;
     default:
